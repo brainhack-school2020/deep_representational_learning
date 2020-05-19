@@ -31,16 +31,25 @@ Description : N = 21 neurotypical human participants; EEG recordings (128 electr
 ~3200 trials per particpant (total trials > 63 000).
 
 
-# 1) Deep neural networks
-# concepts and tools
+# Deliverables
+
+The plan is to have : 
 
 
+- Python scripts for the steps 2 and 3
+- A binder repo that enables to reproduce these analyses
 
 
-# 2) Using linear classifiers to generate EEG Representational Dissimialrity Matrices.
+# Results
+# Progress overview
+ This project was first initiated the 19th of May 2020 by Simon Faghel-Soubeyrand as a part of the Brain Hack SChool.
 
 
+# Tools I learned during this project
+- deep learning
+- Python
+- using calcul Quebec clusters
 
 
-# 3) 
-
+# Conclusion and acknowledgements
+ 
