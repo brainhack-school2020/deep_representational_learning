@@ -1,13 +1,13 @@
 # the deep_representational_learning repository : Summary
 
-The aim of this project will (most likely) be to make a deep neural network that is close(r) to human brain representations in the visual modality.
+The aim of this project will (most likely) be to make a deep neural network that is close(r) to human brain representations. This will be in the visual modality.
 
  
 This will go in three steps.
 
 1) create a custom deep convolutional neural network (DCNN; using  TensorFlow & Keras)
-2) create, from high-density EEG time series, group-averaged representational dissimialrity matrices (RDMs; we will be feeding eeg topographies to linear classifers to do).
-3) bias the weights of each of the DCNNs' layers so that it best captures human represenations. Roughly, this will be done using the RDMs computed in step 2. 
+2) create, from high-density EEG time series, group-averaged representational dissimialrity matrices (RDMs; we will be feeding eeg topographies to linear classifers to do so).
+3) bias the weights of each of the DCNNs' layers so that it best captures human representations. Roughly, this will be done using the RDMs computed in step 2. 
 
 # Project definition
 # Background
@@ -27,10 +27,6 @@ The structure of the analyses  will rely on :
 
 Description : N = 21 neurotypical human participants; EEG recordings (128 electrodes BioSemi); 
 ~3200 trials per particpant (total trials > 63 000).
-
-
-
-
 
 # 1) Deep neural networks
 # concepts and tools
