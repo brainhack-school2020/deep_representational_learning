@@ -27,8 +27,15 @@ The structure of the analyses  will rely on :
 
 # Data
 
-Description : N = 21 neurotypical human participants; EEG recordings (128 electrodes BioSemi); 
+Description : N = 21 neurotypical human participants; preprocessed EEG recordings (128 electrodes BioSemi); 
 ~3200 trials per particpant (total trials > 63 000).
+
+Task: 
+
+Participants completed a simple one-back task over a stream of images containing faces of different emotions/gender, human-made/natural objects, animals and scenes.
+They had to answer (key press) whenever two identical images were shown in a row (e.g. imgA-imgZ-imgR-*imgR*).
+
+![](./imgs/methods_eeg_oneback.png =200x375)
 
 
 # Deliverables
