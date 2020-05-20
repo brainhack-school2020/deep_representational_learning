@@ -46,6 +46,15 @@ The plan is to have :
 
 
 # Results
+
+2D representation of the representational distances derived from the RDMs of 3 subjects groups (Multi-Dimensional Scaling).
+
+![alt text](eeg-rsa-mds.gif)
+
+
+
+
+
 # Progress overview
  This project was first initiated the 19th of May 2020 by Simon Faghel-Soubeyrand as a part of the Brain Hack SChool.
 

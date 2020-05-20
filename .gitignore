@@ -3,6 +3,6 @@ subjects_RDMs/
 
 # files type ignored
 *.mat
-
+*.pyc
 
 
