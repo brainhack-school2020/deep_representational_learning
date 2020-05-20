@@ -35,7 +35,7 @@ Task:
 Participants completed a simple one-back task over a stream of images containing faces of different emotions/gender, human-made/natural objects, animals and scenes.
 They had to answer (key press) whenever two identical images were shown in a row (e.g. imgA-imgZ-imgR-*imgR*).
 
-![alt text](./imgs/methods_eeg_oneback.png=200x375)
+![alt text](methods_eeg_oneback.png=200x375)
 
 
 # Deliverables
