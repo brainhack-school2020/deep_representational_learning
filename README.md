@@ -47,7 +47,9 @@ The plan is to have :
 
 # Results
 
-2D representation of the representational distances derived from the RDMs of 3 subjects groups (Multi-Dimensional Scaling).
+2D coordinates of the representational distances from the RDMs of 3 subjects groups were derived with Multi-Dimensional Scaling (MDS).
+
+[Representational Dissimilarity Matrices will soon appear here].
 
 ![alt text](eeg-rsa-mds.gif)
 
@@ -60,10 +62,6 @@ The plan is to have :
 
 
 # Tools I learned during this project
-- deep learning
-- Python
-- using calcul Quebec clusters
-
-
+ TBD
 # Conclusion and acknowledgements
- 
+ TBD
