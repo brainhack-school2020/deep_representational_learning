@@ -55,4 +55,34 @@ def get_stimuli(image_dir,nimg):
         image_data.append(pix)
     return image_data, image_order
 
+def define_labels_colors(cmap, image_order):
+    
+    cmap=cmap.colors
+    n_categories = 6
+    cmap_is = np.linspace(0, 255, n_categories).astype(int)
+
+    category_colors = {}
+    category_colors['face fear'] = cmap[cmap_is[0], :]
+    category_colors['face happy'] = cmap[cmap_is[1], :]
+    category_colors['face neutral'] = cmap[cmap_is[2], :]
+    category_colors['animals'] = cmap[cmap_is[3], :]
+    category_colors['scenes'] = cmap[cmap_is[4], :]
+    category_colors['objects'] = cmap[cmap_is[4], :]
+    labels_rdm = {}
+    for j, _ in enumerate(image_order):
+        if j<8:
+            labels_rdm[j] = 'face fear'
+        elif j<16:
+            labels_rdm[j]= 'face happy'
+        elif j<24:
+            labels_rdm[j]= 'face neutral' 
+        elif j<32:
+            labels_rdm[j]= 'animals'
+        elif j<41:
+            labels_rdm[j]= 'scenes'
+        elif j<49:
+            labels_rdm[j]= 'objects'
+
+    return category_colors, labels_rdm
+
 

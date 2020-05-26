@@ -1,0 +1,21 @@
+import plotly.graph_objects as go
+import matplotlib.pyplot as plt
+import numpy as np
+import os
+import os.path as op
+import scipy
+import scipy.spatial.distance
+from helpful_functions import average_subjects_rdms, normalise_dist, get_stimuli, reorder_rdm
+
+general_dir= '/home/adf/faghelss/CharestLab/brainhackschool/deep_representational_learning/'
+
+# load stimuli
+nimg = 49
+image_dir = op.join(general_dir,'stimuli/')
+rdm_file = op.join(general_dir,'derivatives/output_rdms.npy')
+image_data, image_order = get_stimuli(image_dir,nimg)
+
+z = np.load(rdm_file)
+
+fig = go.Figure(data=go.Heatmap(z))
+fig.show()

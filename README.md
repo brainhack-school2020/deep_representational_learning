@@ -17,7 +17,11 @@ The first two steps will be developped in parallel. The last step will integrate
 # Project definition
 # Background
 
-The idea of restraining a DCNN  weight representations is highly inspired by work from Cichy et al., (2014;PNAS) and Kietzmann et al., (2019;PNAS).
+The idea of restraining a DCNN  weight representations is highly inspired by work from Cichy et al., (2016) and Kietzmann et al., (2019;PNAS).
+
+[Cichy et al., (2016)](https://www.nature.com/articles/srep27755)
+[Kietzmann et al., (2019)](https://www.pnas.org/content/116/43/21854)
+
 
 
 # Tools

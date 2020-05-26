@@ -29,6 +29,7 @@ general_dir= '/home/adf/faghelss/CharestLab/brainhackschool/deep_representationa
 # load stimuli
 nimg = 49
 image_dir = op.join(general_dir,'stimuli/')
+output_rdm_file = op.join(general_dir,'derivatives/output_rdms.npy')
 image_data, image_order = get_stimuli(image_dir,nimg)
 
 # define category colors
@@ -44,8 +45,10 @@ time_range_4 = np.logical_and(times<.400, times>.22)
 
 # time_range = np.asarray(list(range(70,150)))
 
-rdms_avg  = normalise_dist(np.asarray(rdms_all).mean(axis=0))
+rdms_avg  = (np.asarray(rdms_all).mean(axis=0))
 
+
+np.save(output_rdm_file, rdms_avg)
 
 _min, _max = np.amin(rdms_avg), np.amax(rdms_avg)
 
