@@ -103,3 +103,58 @@ print(figure_name)
 figfull = op.join(figure_dir,figure_name)
 plt.gcf().savefig(figfull)
 plt.show()
+
+
+
+
+
+ax, fig  = plt.subplots(figsize=(22,6))
+# sns.barplot(data=kendall_timec_df.max())
+fig = sns.lineplot(data=kendall_timec_df.max(),dashes=False)
+plt.show()
+
+
+
+sns.set_palette(sns.color_palette("Blues",1)) # rocket, "muted purple"
+
+
+
+ax, fig  = plt.subplots(figsize=(20,10))
+fig = sns.lineplot(x=layers_names, y=times[list(kendall_timec_df.idxmax())],dashes=False)
+fig.set_xticklabels(labels=layers_names,rotation=40)
+plt.title(f'peak similarity of brain x {model.name} layers \n ',fontsize=20)
+plt.xlabel(f'{model.name} layer hierarchy',fontsize=15)
+plt.ylabel('peak time (s)',fontsize=15)
+figure_name=f'brain_x_{model.name}_timepeaks.png'
+print(figure_name)
+figfull = op.join(figure_dir,figure_name)
+plt.gcf().savefig(figfull)
+plt.show()
+
+
+
+
+sns.set_style("darkgrid")
+plt.style.use("dark_background")
+
+ax, fig  = plt.subplots(figsize=(13,15))
+sns.set_palette(sns.color_palette("Blues",nb_layers)) # rocket, "muted purple"
+ax = sns.stripplot(x=times[list(kendall_timec_df.idxmax())], y=layers_names,size=20,
+                   edgecolor="gray",linewidth=.8, alpha=1)
+ax.invert_yaxis()
+# Make the grid horizontal instead of vertical
+ax.xaxis.grid(True)
+ax.yaxis.grid(False)
+
+ax.set_xlim(0,.65)
+plt.title(f'occurence of peak (brain x DCNN) similarity as a function of model hierarchy',fontsize=20)
+plt.ylabel(f'{model.name} hierarchy \n ----------------------------> deeper layers ',fontsize=17)
+plt.xlabel('occurence of peak similarity  (s)',fontsize=17)
+
+
+
+figure_name=f'brain_x_{model.name}_timepeaks.png'
+print(figure_name)
+figfull = op.join(figure_dir,figure_name)
+plt.gcf().savefig(figfull)
+plt.show()
