@@ -42,11 +42,21 @@ for t in list(range(0,len(times))):
 model = VGG16(weights='imagenet', include_top=True)
 nb_layers=len(model.layers)
 layers_interest=list(range(1,nb_layers))
-layers_interest = [2,6,10,14,18,20,21,22]
+# layers_interest = [2,5,9,13,17,10,21,22]
 
+# initialize activation layer variable as directory : layer_name
+count=0
+layers_names = []
+activation_layers = dict()
+for lay in layers_interest:
+    count=+1
+    layers_names.append(model.layers[lay].name)
+    activation_layers[model.layers[lay].name] = {}
+
+sns.set()
 
 kendall_timec_df = pd.DataFrame()
-palette = sns.color_palette("mako_r", len(layers_interest))
+palette = sns.color_palette("cubehelix", len(layers_interest)) # sns.palplot(sns.cubehelix_palette(8))8))
 corr_timecourse = dict()
 # correlate brain and dcnn rdms
 for lay in layers_interest:
@@ -57,6 +67,7 @@ for lay in layers_interest:
     corr_rdms_array = normalise_dist(1-np.asarray(corr_rdms_df))
 
     pearson_timecourse=[]
+    pvals_timecourse=[]
     corr_timecourse[layer_name]   = {}
     for this_slice in range(len(times)):
         human_rdm = normalise_dist(scipy.spatial.distance.squareform(human_rdms_timecourse[:,this_slice].squeeze()))
@@ -67,17 +78,28 @@ for lay in layers_interest:
 
         r, p = scipy.stats.kendalltau(x.flatten(), y.flatten()) # corr_rdms_df.corrwith(human_rdm_df)
         pearson_timecourse.append(r)
+        pvals_timecourse.append(p)
 
+    temp_df = pd.DataFrame({f'{layer_name}': pearson_timecourse})
     temp_df = pd.DataFrame({f'{layer_name}': pearson_timecourse})
     kendall_timec_df = pd.concat([kendall_timec_df,temp_df],axis=1)
 
-    fig = sns.lineplot(times,pearson_timecourse,palette=palette)
-    fig.set_title(f'{layer_name}')
+sns.set_style("dark")
+plt.style.use("dark_background")
 
-plt.show()
+ax, fig  = plt.subplots(figsize=(22,6))
 
-# kendall_timec_df=kendall_timec_df
-
-fig = sns.lineplot(x=times,y=layer_name,data=kendall_timec_df,hue=model.layers[lay].name,palette=palette)
-fig.set_title(f'{layer_name}')
+sns.set_palette(sns.color_palette("Blues", nb_layers)) # rocket, "muted purple"
+fig = sns.lineplot(data=kendall_timec_df,dashes=False)
+plt.legend(layers_names, ncol=2, loc='upper left')
+fig.set(xticks=[20,60,100,140, 180,217])
+fig.set(xticklabels=times[list([20,60,100,140,180,217])].round(2))#round(times[list([20,60,100,140,180,217])],2)
+plt.title(f'timecourse of brain & {model.name} representation similarity \n (darker tones --> deeper layers)',fontsize=20)
+plt.xlabel('time (s)',fontsize=15)
+plt.ylabel('similarity to brain representation (kendall''s tau)',fontsize=15)
+# show the time course association of each layer's RDM and brain RDM and save as figure
+figure_name=f'brain_x_{model.name}_timecourse.png'
+print(figure_name)
+figfull = op.join(figure_dir,figure_name)
+plt.gcf().savefig(figfull)
 plt.show()
