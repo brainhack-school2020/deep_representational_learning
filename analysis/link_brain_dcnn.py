@@ -5,6 +5,7 @@ import os.path as op
 import scipy
 import scipy.spatial.distance
 import scipy.io
+import pingouin as pg
 from show_VGG16_RDMs import show_activation_layer_rdm
 import numpy as np
 import pandas as pd
@@ -15,144 +16,189 @@ import seaborn as sns
 
 
 #   # # # # # # # INITIALIZE  PATHS, LOAD STIMULI & AVERAGED (RDM) DATA, DEFINE TIME AXIS
-general_dir= '/home/adf/faghelss/CharestLab/brainhackschool/deep_representational_learning/'
-figure_dir = op.join(general_dir,'analysis/models/models_rdm_visualisation')
-output_layer_rdms_dir= op.join(general_dir,'analysis/models/models_layer_rdms')
-image_dir = op.join(general_dir,'stimuli/')
+general_dir           = '/home/adf/faghelss/CharestLab/brainhackschool/deep_representational_learning/'
+figure_dir            = op.join(general_dir,'analysis/models/models_rdm_visualisation')
+output_layer_rdms_dir = op.join(general_dir,'analysis/models/models_layer_rdms')
+image_dir             = op.join(general_dir,'stimuli/')
 
-# experimental stimuli directory
-nimg = 49
-images_files = glob.glob(os.path.join(image_dir, '*.png'))
-images_files.sort()
-image_order = np.asarray(list(range(1,nimg+1)))-1
+# experimental stimuli list
+nimg         = 49
+images_files = glob.glob(os.path.join(image_dir, '*.png')).sort()
+image_order  = np.asarray(list(range(1,nimg+1)))-1
 
-rdm_file = op.join(general_dir,'derivatives/output_rdms.npy')
 
-# the time windows of interest
-times = scipy.io.loadmat(op.join('time_vector.mat'))['time'][0] # load time vector
-time_range_1 = np.logical_and(times<.0, times>-.2)
+# file for a group-averaged representational dissimilarity matrix (RDM): this was averaged from N=23 participants in "check_rdms.py" script
+rdm_file     = op.join(general_dir,'derivatives/output_rdms.npy')
+
+# time vector from matlab (filedtrip preprocessing)
+times        = scipy.io.loadmat(op.join('time_vector.mat'))['time'][0] # load time vector
+time_range_1 = np.logical_and(times<.0, times>-.2) # this is the baseline
 
 # load group-averaged representational dissimilarity matrix (RDM), clear out baseline
 human_rdms_timecourse = np.load(rdm_file)
-m_baseline = human_rdms_timecourse[:,time_range_1].mean(axis=1).squeeze()
-for t in list(range(0,len(times))):
-    human_rdms_timecourse[:,t] = np.subtract(human_rdms_timecourse[:,t],m_baseline) +.5
+m_baseline            = human_rdms_timecourse[:,time_range_1].mean(axis=1).squeeze()
+for time in list(range(0,len(times))): human_rdms_timecourse[:,time] = np.subtract(human_rdms_timecourse[:,time],m_baseline) +.5
 
-# load model
-model = VGG16(weights='imagenet', include_top=True)
-nb_layers=len(model.layers)
-layers_interest=list(range(1,nb_layers))
-# layers_interest = [2,5,9,13,17,10,21,22]
+# load model, we start with vgg16 because it's handy and appropriate for vision models 
+model           = VGG16(weights='imagenet', include_top=True)
+nb_layers       = len(model.layers)
+layers_interest = list(range(1,nb_layers)) # 1 cause we skip the input layer
 
-# initialize activation layer variable as directory : layer_name
-count=0
+# initialize activation layer variable as a dict, create layers_names dict (useful for plotting later)
+count        = 0
 layers_names = []
 activation_layers = dict()
 for lay in layers_interest:
-    count=+1
+    count =+ 1
     layers_names.append(model.layers[lay].name)
     activation_layers[model.layers[lay].name] = {}
 
-sns.set()
 
+# initialize dataframe for correlations
 kendall_timec_df = pd.DataFrame()
-palette = sns.color_palette("cubehelix", len(layers_interest)) # sns.palplot(sns.cubehelix_palette(8))8))
+pval_df          = pd.DataFrame()
 corr_timecourse = dict()
-# correlate brain and dcnn rdms
+
+# # # # # # # CORRELATE DCNN & BRAIN RDMs THROUGH TIME  (EEG from -.2 to .65 after image onset) # # #  
 for lay in layers_interest:
     layer_name = model.layers[lay].name # e.g. block1_conv1
 
-    # save layer's RDM to correlate with human brain RDMs
+    # load layer's RDM to correlate with human brain RDMs
     corr_rdms_df = pd.read_pickle(op.join(output_layer_rdms_dir,f'rdm_{layer_name}.pkl'))
-    corr_rdms_array = normalise_dist(1-np.asarray(corr_rdms_df))
+    corr_rdms_array = normalise_dist(scipy.spatial.distance.squareform(1-(np.asarray(corr_rdms_df))))
 
     pearson_timecourse=[]
     pvals_timecourse=[]
     corr_timecourse[layer_name]   = {}
     for this_slice in range(len(times)):
-        human_rdm = normalise_dist(scipy.spatial.distance.squareform(human_rdms_timecourse[:,this_slice].squeeze()))
+        human_rdm = normalise_dist((human_rdms_timecourse[:,this_slice].squeeze()))
         human_rdm_df = pd.DataFrame(data=human_rdm)
-        x = np.asarray(human_rdm.squeeze())
-        y = np.asarray(corr_rdms_array.squeeze())
+        y = (human_rdm.squeeze())
+        x = (corr_rdms_array.squeeze())
 
 
         r, p = scipy.stats.kendalltau(x.flatten(), y.flatten()) # corr_rdms_df.corrwith(human_rdm_df)
         pearson_timecourse.append(r)
         pvals_timecourse.append(p)
 
-    temp_df = pd.DataFrame({f'{layer_name}': pearson_timecourse})
-    temp_df = pd.DataFrame({f'{layer_name}': pearson_timecourse})
+    temp_df          = pd.DataFrame({f'{layer_name}': pearson_timecourse})
+    temp_val_df      = pd.DataFrame({f'{layer_name}': pvals_timecourse})
     kendall_timec_df = pd.concat([kendall_timec_df,temp_df],axis=1)
-
-sns.set_style("dark")
-plt.style.use("dark_background")
-
-ax, fig  = plt.subplots(figsize=(22,6))
-
-sns.set_palette(sns.color_palette("Blues", nb_layers)) # rocket, "muted purple"
-fig = sns.lineplot(data=kendall_timec_df,dashes=False)
-plt.legend(layers_names, ncol=2, loc='upper left')
-fig.set(xticks=[20,60,100,140, 180,217])
-fig.set(xticklabels=times[list([20,60,100,140,180,217])].round(2))#round(times[list([20,60,100,140,180,217])],2)
-plt.title(f'timecourse of brain & {model.name} representation similarity \n (darker tones --> deeper layers)',fontsize=20)
-plt.xlabel('time (s)',fontsize=15)
-plt.ylabel('similarity to brain representation (kendall''s tau)',fontsize=15)
-# show the time course association of each layer's RDM and brain RDM and save as figure
-figure_name=f'brain_x_{model.name}_timecourse.png'
-print(figure_name)
-figfull = op.join(figure_dir,figure_name)
-plt.gcf().savefig(figfull)
-plt.show()
+    pval_df    = pd.concat([pval_df ,temp_val_df],axis=1)
 
 
 
+# create panda data frames for every rdms anc concatenate in big_df for partial correlation with penguin
+vgg_rdms_all = pd.DataFrame()
+big_df = pd.DataFrame()
+for lay in layers_interest:
+    layer_name = model.layers[lay].name # e.g. block1_conv1
 
+    # save layer's RDM to correlate with human brain RDMs
+    temp_df = pd.read_pickle(op.join(output_layer_rdms_dir,f'rdm_{layer_name}.pkl'))
+    temp_df = normalise_dist(scipy.spatial.distance.squareform(1-(np.asarray(temp_df))))
+    temp_df = pd.DataFrame(temp_df.flatten(), index=range(0,1176),columns=[layers_names[lay-1]])
+    vgg_rdms_all = pd.concat([vgg_rdms_all, temp_df],axis=1)
 
-ax, fig  = plt.subplots(figsize=(22,6))
-# sns.barplot(data=kendall_timec_df.max())
-fig = sns.lineplot(data=kendall_timec_df.max(),dashes=False)
-plt.show()
+human_rdms_all = pd.DataFrame()
+for this_slice in range(len(times)):
+    temp=pd.DataFrame(human_rdms_timecourse[:,this_slice].squeeze(), index=range(0,1176),columns=[f'{times[this_slice].round(3)}'])
+    human_rdms_all = pd.concat([human_rdms_all,temp],axis=1)
 
-
-
-sns.set_palette(sns.color_palette("Blues",1)) # rocket, "muted purple"
-
-
-
-ax, fig  = plt.subplots(figsize=(20,10))
-fig = sns.lineplot(x=layers_names, y=times[list(kendall_timec_df.idxmax())],dashes=False)
-fig.set_xticklabels(labels=layers_names,rotation=40)
-plt.title(f'peak similarity of brain x {model.name} layers \n ',fontsize=20)
-plt.xlabel(f'{model.name} layer hierarchy',fontsize=15)
-plt.ylabel('peak time (s)',fontsize=15)
-figure_name=f'brain_x_{model.name}_timepeaks.png'
-print(figure_name)
-figfull = op.join(figure_dir,figure_name)
-plt.gcf().savefig(figfull)
-plt.show()
+big_df= pd.concat([vgg_rdms_all,human_rdms_all],axis=1)
 
 
 
+# # # # # # # # # # partial correlation (kendall's tau) with first layer thrown out of covariance # # # # # # # # # # ## # #
+partialKendall_timec_df = pd.DataFrame()
+partial_pval_df          = pd.DataFrame()
+layers_interest=list(range(2,nb_layers))
+partial_corr_timecourse = dict()
+# correlate brain and dcnn rdms
+for lay in layers_interest:
+    
+    layer_name = model.layers[lay].name # e.g. block1_conv1
 
+    print(f"{layer_name}")
+    # save layer's RDM to correlate with human brain RDMs
+    corr_rdms_df = pd.read_pickle(op.join(output_layer_rdms_dir,f'rdm_{layer_name}.pkl'))
+    corr_rdms_array = normalise_dist(scipy.spatial.distance.squareform(1-(np.asarray(corr_rdms_df))))
+
+    partialK_timecourse=[]
+    partialK_pvals_timecourse=[]
+    partial_corr_timecourse[layer_name]   = {}
+    for this_slice in range(len(times)):
+        coeffs_temp = pg.partial_corr(data=big_df ,x=f"{layer_name}", y=f"{times[this_slice].round(3)}",
+        covar=["block1_conv1"],method = 'kendall')
+        partialK_timecourse.append(coeffs_temp.r.kendall)
+        partialK_pvals_timecourse.append(coeffs_temp['p-val'].kendall)
+    
+    temp_df          = pd.DataFrame({f'{layer_name}': partialK_timecourse})
+    temp_val_df      = pd.DataFrame({f'{layer_name}': partialK_pvals_timecourse})
+    partialKendall_timec_df = pd.concat([partialKendall_timec_df,temp_df],axis=1)
+    partial_pval_df     = pd.concat([partial_pval_df  ,temp_val_df],axis=1)
+
+
+def plot_brain_dnn_similiarity(corr_df,pval_df,nb_layers):
+    # set seaborn style, or put black background
+    sns.set()
+    plt.style.use("dark_background")
+
+    # set critical p-values to assess significance, here we Bonferonni-corrected 
+    crit_pval = (1E-40)/(218*nb_layers)
+    list_pointx   = np.asarray(list(range(0,218)))
+    signif_points = np.asarray(pval_df.block1_conv2<crit_pval)
+    list_pointx[signif_points]
+
+    ax, fig  = plt.subplots(figsize=(22,6))
+
+    sns.set_palette(sns.color_palette("Purples", nb_layers)) # rocket, "muted purple"
+    fig = sns.lineplot(data=corr_df,dashes=False,linewidth=2)
+    plt.legend(layers_names, ncol=2, loc='upper left')
+    fig.xaxis.grid(True)
+    fig.yaxis.grid(False)
+    fig.set(xticks=[20,60,100,140, 180,217])
+    fig.set(xticklabels=times[list([20,60,100,140,180,217])].round(2))#round(times[list([20,60,100,140,180,217])],2)
+    plt.title(f'timecourse of similarity between brain & DCNN ({model.name}) representations  \n (darker tones --> deeper layers)',fontsize=20)
+    plt.xlabel('time from onset(s)',fontsize=15)
+    plt.ylabel('similarity to brain representation (kendall''s tau)',fontsize=15)
+    plt.plot(list_pointx[signif_points], np.zeros(times[signif_points].shape), linewidth=2, color='gray')
+    # show the time course association of each layer's RDM and brain RDM and save as figure
+    figure_name=f'brain_x_{model.name}_timecourse.png'
+    print(figure_name)
+    figfull = op.join(figure_dir,figure_name)
+    plt.gcf().savefig(figfull)
+    plt.show()
+
+plot_brain_dnn_similiarity(corr_df=kendall_timec_df,pval_df=pval_df,nb_layers=22)
+
+
+
+# ax, fig  = plt.subplots(figsize=(22,6))
+# # sns.barplot(data=kendall_timec_df.max())
+# fig = sns.lineplot(data=kendall_timec_df.max(),dashes=False)
+# fig.set_xticklabels(labels=layers_names,rotation=40)
+# plt.show()
+
+max_layers=np.asarray((normalise_dist(kendall_timec_df.max())+.1)*50)
+
+
+# here we plot when each layer peaks with brain representations
 sns.set_style("darkgrid")
 plt.style.use("dark_background")
 
 ax, fig  = plt.subplots(figsize=(13,15))
-sns.set_palette(sns.color_palette("Blues",nb_layers)) # rocket, "muted purple"
+sns.set_palette(sns.color_palette("Purples",nb_layers)) # rocket, "muted purple"
 ax = sns.stripplot(x=times[list(kendall_timec_df.idxmax())], y=layers_names,size=20,
                    edgecolor="gray",linewidth=.8, alpha=1)
 ax.invert_yaxis()
 # Make the grid horizontal instead of vertical
 ax.xaxis.grid(True)
 ax.yaxis.grid(False)
-
 ax.set_xlim(0,.65)
 plt.title(f'occurence of peak (brain x DCNN) similarity as a function of model hierarchy',fontsize=20)
 plt.ylabel(f'{model.name} hierarchy \n ----------------------------> deeper layers ',fontsize=17)
 plt.xlabel('occurence of peak similarity  (s)',fontsize=17)
-
-
-
 figure_name=f'brain_x_{model.name}_timepeaks.png'
 print(figure_name)
 figfull = op.join(figure_dir,figure_name)

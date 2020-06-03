@@ -50,7 +50,6 @@ print('Predicted:', decode_predictions(features,top=2)[0])
 # initialize activation layer variable as directory : layer_name
 activation_layers = dict()
 for lay in layers_interest:
-    
     activation_layers[model.layers[lay].name] = {}
 
 model.summary() 

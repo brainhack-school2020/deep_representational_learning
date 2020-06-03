@@ -3,24 +3,49 @@
 I'm a PhD student at Université de Montréal. I use an aggregate of psychophysics, EEG, and computational techniques to understand individual differences in vision, specifically in object/face recognition.
 
 
-The aim of my project will (most likely) be to make a deep neural network that is closer to human brain representations. This will be in the visual modality.
+The practical objectives of this project were to develop skills in Python, data visualisation and developping better coding habits with Github. 
+
+The general aim of this project is to understand and visualize how deep neural networks represent visual stimuli compared to our brain. For human representations, we will be using high-density EEG signal from a simple visual task. 
 
  
 The project will unfold in three steps. 
 
-1) create a custom deep convolutional neural network (DCNN; using  TensorFlow & Keras).
-2) create, from high-density EEG time series, group-averaged representational dissimialrity matrices (RDMs; we will be feeding eeg topographies to linear classifers to do so).
-3) bias the weights of each of the DCNNs' layers so that it best captures human representations. Roughly, this will be done using the RDMs computed in step 2. 
+1) Create a custom deep convolutional neural network (DCNN; using  TensorFlow & Keras). 
+2) Create, from high-density EEG time series, group-averaged representational dissimialrity matrices (RDMs; we will be feeding eeg topographies to linear classifers to do so).
+3) Compare the representations (RDMs) from each of the DCNNs' layers to human brain representations (RDMs) unfolding in time. 
 
 The first two steps will be developped in parallel. The last step will integrate their output.
+
+Initially, it was planned to train from scratch a DCNN to "learn" more human/brain representations; but this was too ambitious and I chose to focus on learning programming tools (described below).
 
 # Project definition
 # Background
 
-The idea of restraining a DCNN  weight representations is highly inspired by work from Cichy et al., (2016) and Kietzmann et al., (2019;PNAS).
+The idea of comparing and restraining a DCNN  weight representations is highly inspired by work from Cichy et al., (2016) and Kietzmann et al., (2019;PNAS). 
 
 [Cichy et al., (2016)](https://www.nature.com/articles/srep27755)
 [Kietzmann et al., (2019)](https://www.pnas.org/content/116/43/21854)
+
+
+In essence, we already know that DCNNs encodes information in a similar (hierarchical) way than our brain.
+
+
+![alt_text](brain_dcnn_parallel.png)
+
+
+ 
+The idea here is to come up with a common measure of processing in DCNN that is comparable to brain imaging signal (here EEG). 
+A good sumary of brain and DCNN computations can be obtained with a Representational Dissimlarity Matrix (RDM).
+
+
+
+
+
+To obtain an RDM for a DCNN, we can feed the same images that were shown to the brain of human participants, and to look at the activation of the layers of the network.
+ 
+
+
+
 
 
 
@@ -28,12 +53,29 @@ The idea of restraining a DCNN  weight representations is highly inspired by wor
 
 The structure of the analyses will rely on :
 
-- Python: pyrsa, scikit-learn, tensorFlow & keras, and other visualisation tools.
-- We will try to make the repository BIDS friendly as much as possible.
+- developping analysis in Python scripts: pyrsa, scikit-learn, tensorFlow & keras
+- basics in visualisation tools : using jupyter notebooks, interactive widgets, seaborn, and scikit-learn for multi-dimensional scaling.  
+- Considering that the data is not completely available, no need to focus on BIDS standards that much.
 
 # Data
 
-Description : N = 23 neurotypical human participants; preprocessed EEG recordings (128 electrodes BioSemi); 
+Description (general): 
+
+we previously used brain EEG data to "decode" pairs of images (faces, objects, scenes, animals, etc.) we presented to human participants.
+By doing this with all pairs of images presented (49 stimuli = 1178 pairs), we created a Dissimilarity Matrix that is a summary of how the brain of each participant encodes diverse visual stimuli.
+This Representational Dissimilarity Matrix (RDM) was used as the base data input of this project.
+
+
+
+Deep neural networks (DNNs) encodes information in a similar way to the visual brain to categorize images; "they" activate more or less specific neurons depending on what they are presented with, and makes a decision ("This is a dog").
+Using RDMs to model human and DNN data was not an accident: it is useful because it enables us to have a similar format in which we can combine both human and "machine" representations
+
+
+-RDMs were averaged across particpants (N=23).
+   
+
+
+Description specifics : N = 23 neurotypical human participants; preprocessed EEG recordings (128 electrodes BioSemi); 
 ~3200 trials per particpant (total trials ~= 73,000).
 
 Task: participants completed a simple one-back task over a stream of images containing faces of different emotions/gender, human-made/natural objects, animals and scenes.
