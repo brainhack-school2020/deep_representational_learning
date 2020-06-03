@@ -27,7 +27,7 @@ The idea of comparing and restraining a DCNN  weight representations is highly i
 [Kietzmann et al., (2019)](https://www.pnas.org/content/116/43/21854)
 
 
-In essence, we already know that DCNNs encodes information in a similar (hierarchical) way than our brain.
+We already know that DCNNs encodes information in a similar (hierarchical) way than our brain.
 
 
 ![alt_text](brain_dcnn_parallel.png)
