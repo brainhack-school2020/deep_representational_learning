@@ -33,19 +33,9 @@ In essence, we already know that DCNNs encodes information in a similar (hierarc
 ![alt_text](brain_dcnn_parallel.png)
 
 
- 
+Deep neural networks (DNNs) encodes information in a similar way to the visual brain to categorize images; "they" activate more or less specific neurons depending on what they are presented with, a$ 
 The idea here is to come up with a common measure of processing in DCNN that is comparable to brain imaging signal (here EEG). 
 A good sumary of brain and DCNN computations can be obtained with a Representational Dissimlarity Matrix (RDM).
-
-
-
-
-
-To obtain an RDM for a DCNN, we can feed the same images that were shown to the brain of human participants, and to look at the activation of the layers of the network.
- 
-
-
-
 
 
 
@@ -61,25 +51,16 @@ The structure of the analyses will rely on :
 
 Description (general): 
 
-we previously used brain EEG data to "decode" pairs of images (faces, objects, scenes, animals, etc.) we presented to human participants.
+we previously used brain EEG data to "decode" pairs of images (faces, objects, scenes, animals, etc.) that were presented to human participants.
 By doing this with all pairs of images presented (49 stimuli = 1178 pairs), we created a Dissimilarity Matrix that is a summary of how the brain of each participant encodes diverse visual stimuli.
 This Representational Dissimilarity Matrix (RDM) was used as the base data input of this project.
-
-
-
-Deep neural networks (DNNs) encodes information in a similar way to the visual brain to categorize images; "they" activate more or less specific neurons depending on what they are presented with, and makes a decision ("This is a dog").
-Using RDMs to model human and DNN data was not an accident: it is useful because it enables us to have a similar format in which we can combine both human and "machine" representations
-
 
 -RDMs were averaged across particpants (N=23).
    
 
+Description specifics : N = 23 neurotypical human participants; preprocessed EEG recordings (128 electrodes BioSemi); ~3200 trials per particpant (total trials ~= 73,000).
 
-Description specifics : N = 23 neurotypical human participants; preprocessed EEG recordings (128 electrodes BioSemi); 
-~3200 trials per particpant (total trials ~= 73,000).
-
-Task: participants completed a simple one-back task over a stream of images containing faces of different emotions/gender, human-made/natural objects, animals and scenes.
-They had to answer (key press) whenever two identical images were shown in a row (e.g. imgA-imgZ-imgR-**imgR**).
+Task: simple one-back task over a stream of images containing faces of different emotions/gender, human-made/natural objects, animals and scenes. 
 
 ![alt text](methods_eeg_oneback.png)
 
@@ -96,21 +77,18 @@ And perhaps :
 
 - A contained that enables to reproduce these analyses
 
-
 # Results
 
-**Representational Dissimiarlity matrices (RDMs)** have been derived at each time step, and averaged across participants. 
+group-average **Representational Dissimiarlity matrices (RDMs)** have been derived at every time step from image onset. 
 Each of this *stimulus* x *stimulus* matrix indicates the brain's representational model for various visual stimui.
 
 ![alt text](rdms_avg_timecourse.png)
 
 
-2D coordinates of the representational distances from the RDMs of 3 subjects groups were derived with Multi-Dimensional Scaling (MDS).
+2D coordinates of the representational distances from the RDMs of 3 subjects groups were derived with Multi-Dimensional Scaling (MDS) using sklearn "MDS".
 
 
 ![alt text](eeg-rsa-mds.gif)
-
-
 
 
 
