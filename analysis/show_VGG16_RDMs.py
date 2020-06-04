@@ -3,9 +3,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-# figure_dir = '~/CharestLab/brainhackschool/deep_representational_learning/analysis/models/models_rdm_visualisation'
-
-
 def show_activation_layer_rdm(activation_layers,layer_name):
     df = pd.DataFrame(activation_layers[layer_name])
 

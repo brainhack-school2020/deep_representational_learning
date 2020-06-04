@@ -90,7 +90,7 @@ def define_labels_colors(cmap, image_order):
 
 
 
-def plot_mds(distances, image_data, categories, category_colors, scaler, title='MDS'):
+def plot_mds(distances, image_data, categories, category_colors, scaler,mark_size):
     
     rdms_norm = normalise_dist(distances)
     pos = get_mds(rdms_norm)
@@ -116,7 +116,7 @@ def plot_mds(distances, image_data, categories, category_colors, scaler, title='
         
         c = categories[category_colors[i]]
 
-        ax2.plot(x1, y1, marker='o', markeredgecolor=c, markerfacecolor=c, markersize=60, zorder=1)
+        ax2.plot(x1, y1, marker='o', markeredgecolor=c, markerfacecolor=c, markersize=mark_size, zorder=1)
         
     for i in range(n_images):   
         x1, y1 = pos[i,:]*1
@@ -149,4 +149,17 @@ def get_mds(utv, pos=None):
     pos = mds.fit_transform(rdm, init=pos)
 
     return pos
+
+def compute_rdm(measurements):
+    """compute_rdm computes a correlation distance based rdm from
+    a measurements array
+    Args:
+    measurements (2D array): conditions by features
+    Returns:
+    correlation distance vector
+    """
+    row, col = np.triu_indices(measurements.shape[0], 1)
+    measurements = measurements - measurements.mean(axis=1, keepdims=True)
+    measurements /= np.sqrt(np.einsum('ij,ij->i', measurements, measurements))[:, None]
+    return 1 - np.einsum('ik,jk', measurements, measurements)[row, col]
 
