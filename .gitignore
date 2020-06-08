@@ -1,8 +1,8 @@
 #  content of these folders are not updated on repo
 subjects_RDMs/
+derivatives/
 
 # files type ignored
-*.mat
 *.pyc
 #ignore checkpoints dirs
 *.ipynb_checkpoints
