@@ -78,7 +78,7 @@ An interactive visualisation of the human brain data (RDMs) can be found in the 
 Results for group-average **Representational Dissimiarlity matrices (RDMs)** have been derived at every time step from image onset. These are shown in 
 Each of this *stimulus* x *stimulus* matrix indicates the brain's representational model for various visual stimui.
 
-2D coordinates of the representational distances from the RDMs are derived "onlin" using Multi-Dimensional Scaling (MDS) from sklearn MDS method.
+2D coordinates of the representational distances from the RDMs are computed  "online" using Multi-Dimensional Scaling (MDS) from sklearn MDS method.
 
 ![alt text](interactive_RSA_time_MDS.gif)
 
@@ -96,7 +96,7 @@ I computed an RDM for every layer of the VGG16 neural network (weights from imag
 By correlating these DNN representations with the human RDMs, we obtain a time course of similarity between VGG16 hierarchical processing and the EEG brain visual representations.
 
 
-![alt text](brain_x_vgg16_timecourse.png)
+![alt text](analysis/models/models_rdms_visualization/brain_x_vgg16_timecourse.png)
 
 
 # Progress overview
