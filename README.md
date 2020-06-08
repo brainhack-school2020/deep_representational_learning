@@ -78,7 +78,9 @@ And perhaps :
 # Results
 ## human brain RDMs
 
-An interactive visualisation of the human brain data (RDMs) can be found in the following jupyter notebook : Analysis/interactive_figures_EEGxRSA.ipynb.
+An interactive visualisation of the human brain data (RDMs) can be found in the following jupyter notebook :
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2020/deep_representational_learning/master?filepath=%2Fanalysis%2Finteractive_figures_EEGxRSA.ipynb)
+
 
 
 Results for group-average **Representational Dissimiarlity matrices (RDMs)** have been derived at every time step from image onset. These are shown in 
