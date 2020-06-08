@@ -1,3 +1,4 @@
+
 Week 3 deliverable : 
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2020/deep_representational_learning/master?filepath=%2Fanalysis%2Finteractive_figures_EEGxRSA.ipynb)
@@ -5,13 +6,13 @@ Week 3 deliverable :
  
 # Summary
 
-I'm a PhD student at Université de Montréal. I use an aggregate of psychophysics, EEG, and computational techniques to understand individual differences in vision, specifically in object/face recognition.
+I'm a PhD student at Université de Montréal & University of Birmingham (UK). I use an aggregate of psychophysics, EEG, and computational techniques to understand individual differences in vision, specifically in object/face recognition.
 
 
 The practical objectives of this project were to develop skills in Python, data visualisation and developping better coding habits with Github. 
 
-The general aim of this project is to understand and visualize how deep neural networks represent visual stimuli compared to our brain. For human representations, we will be using high-density EEG signal from a simple visual task. 
-
+The general aim of this project is to understand and visualize how deep neural networks represent visual stimuli compared to our brain. For human representations, we will use high-density EEG signal from a simple visual task.
+ 
  
 The project will unfold in three steps. 
 
@@ -21,7 +22,7 @@ The project will unfold in three steps.
 
 The first two steps will be developped in parallel. The last step will integrate their output.
 
-Initially, it was planned to train from scratch a DCNN to "learn" more human/brain representations; but this was too ambitious and I chose to focus on learning programming tools (described below).
+Initially, the plan was to train from scratch a DCNN to "learn" more human/brain representations; but this was too ambitious and I chose to focus on learning programming tools (described below).
 
 # Project definition
 # Background
@@ -30,7 +31,7 @@ The idea of comparing and restraining a DCNN  weight representations is highly i
 [Kietzmann et al., (2019)](https://www.pnas.org/content/116/43/21854).
 
 
-Deep neural networks (DNNs) encodes information in a similar way to the visual brain to categorize images (e.g. primary visual cortex V1 encodes typically similar convolutional filters than the first layer of a DNN). 
+Deep neural networks (DNNs) encodes information in a similar way to the visual brain (e.g. primary visual cortex V1 encodes similar information than convolutional filters in the first layer of a DNN). 
 The idea here is to come up with a common measure of processing between DCNN and brain imaging signal, here electroencephalogrpahy (EEG), and link the computations in both modalities. 
 
 ![alt_text](brain_dcnn_parallel.png)
@@ -110,7 +111,7 @@ By correlating these DNN representations with the human RDMs, we obtain a time c
 
 # Tools I learned during this project
 
-  Using many Pyton libraries through implementing DNNs representations, flexible data visualisation, and link between brain and DNN computations. 
+  Using many Python libraries through implementing DNNs representations, flexible data visualisation, and link between brain and DNN computations. 
 
 
 # Conclusion and acknowledgements
