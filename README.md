@@ -1,3 +1,7 @@
+Week 3 deliverable : 
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2020/deep_representational_learning/master?filepath=analysis%2Finteractive_figures_EEGxRSA.ipynb)
+ 
 # Summary
 
 I'm a PhD student at Université de Montréal. I use an aggregate of psychophysics, EEG, and computational techniques to understand individual differences in vision, specifically in object/face recognition.
