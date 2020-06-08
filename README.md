@@ -96,7 +96,7 @@ I computed an RDM for every layer of the VGG16 neural network (weights from imag
 By correlating these DNN representations with the human RDMs, we obtain a time course of similarity between VGG16 hierarchical processing and the EEG brain visual representations.
 
 
-![alt text](analysis/models/models_rdms_visualization/brain_x_vgg16_timecourse.png)
+![alt text](/analysis/models/models_rdm_visualisation/brain_x_vgg16_timecourse.png)
 
 
 # Progress overview
