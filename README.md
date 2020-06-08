@@ -1,6 +1,7 @@
 Week 3 deliverable : 
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2020/deep_representational_learning/master?filepath=analysis%2Finteractive_figures_EEGxRSA.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2020/deep_representational_learning/master?filepath=%2Fanalysis%2Finteractive_figures_EEGxRSA.ipynb)
+
  
 # Summary
 
