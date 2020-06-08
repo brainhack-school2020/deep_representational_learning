@@ -147,6 +147,7 @@ def partial_corr_brainxdcnn(conv_out=0):
 def plot_brain_dnn_similiarity(corr_df,pval_df,nb_layers):
     # set seaborn style, or put black background
     sns.set()
+    sns.set(font_scale=2) 
     plt.style.use("dark_background")
 
     # set critical p-values to assess significance, here we Bonferonni-corrected 
@@ -159,15 +160,18 @@ def plot_brain_dnn_similiarity(corr_df,pval_df,nb_layers):
 
     sns.set_palette(sns.color_palette("Blues", nb_layers)) # rocket, "muted purple"
     fig = sns.lineplot(data=corr_df,dashes=False,linewidth=2)
-    plt.legend(layers_names, ncol=2, loc='upper left')
-    fig.xaxis.grid(True)
+    # plt.legend(layers_names, ncol=2, loc='upper left')
+    # plt.legend(layers_names, ncol=2, loc='upper left')
+    fig.get_legend().remove()
+    fig.axvline(51, color='w', linestyle='--')
+    fig.xaxis.grid(False)
     fig.yaxis.grid(False)
-    fig.set(xticks=[20,60,100,140, 180,217])
-    fig.set(xticklabels=times[list([20,60,100,140,180,217])].round(2))#round(times[list([20,60,100,140,180,217])],2)
+    fig.set(xticks=[51,91,131,171, 211])
+    fig.set(xticklabels=times[list([51,91,131,171, 211])].round(2))#round(times[list([20,60,100,140,180,217])],2)
     plt.title(f'timecourse of similarity between brain & DCNN ({model.name}) representations  \n (darker tones --> deeper layers)',fontsize=20)
     plt.xlabel('time from onset(s)',fontsize=15)
-    plt.ylabel('similarity to brain representation (kendall''s tau)',fontsize=15)
-    plt.plot(list_pointx[signif_points], np.zeros(times[signif_points].shape), linewidth=2, color='gray')
+    plt.ylabel('similarity to brain representation (kendall''s tau)',fontsize=19)
+    # plt.plot(list_pointx[signif_points], np.zeros(times[signif_points].shape), linewidth=2, color='gray')
     # show the time course association of each layer's RDM and brain RDM and save as figure
     figure_name=f'brain_x_{model.name}_timecourse.png'
     print(figure_name)
@@ -177,31 +181,33 @@ def plot_brain_dnn_similiarity(corr_df,pval_df,nb_layers):
 
 conv_out=1
 
-layers_names[conv_out]
-partialKendall_timec_df, partial_pval_df = partial_corr_brainxdcnn(conv_out=conv_out)
-
 plot_brain_dnn_similiarity(corr_df=kendall_timec_df,pval_df=pval_df,nb_layers=22)
 
 max_layers=np.asarray((normalise_dist(kendall_timec_df.max())+.1)*50)
 
+layers_names[conv_out]
+partialKendall_timec_df, partial_pval_df = partial_corr_brainxdcnn(conv_out=conv_out)
 
+
+
+sns.set(font_scale=2)
 # here we plot when each layer peaks with brain representations
 sns.set_style("darkgrid")
 plt.style.use("dark_background")
 sns.set_palette(sns.color_palette("Blues",nb_layers)) # rocket,
 
-ax, fig  = plt.subplots(figsize=(13,15))
+ax, fig  = plt.subplots(figsize=(18,18))
 
-ax = sns.stripplot(x=times[list(kendall_timec_df.idxmax())], y=layers_names,size=20,
+ax = sns.stripplot(x=times[list(kendall_timec_df.idxmax())], y=layers_names,size=30,
                    edgecolor="gray",linewidth=.8, alpha=1)
 ax.invert_yaxis()
 # Make the grid horizontal instead of vertical
 ax.xaxis.grid(True)
 ax.yaxis.grid(False)
 ax.set_xlim(-.2,.65)
-plt.title(f'occurence of peak (brain x DCNN) similarity as a function of model hierarchy',fontsize=20)
-plt.ylabel(f'{model.name} hierarchy \n ----------------------------> deeper layers ',fontsize=17)
-plt.xlabel('occurence of peak similarity  (s)',fontsize=17)
+plt.title(f'occurence of peak brain x DCNN similarity as a function of model hierarchy',fontsize=29)
+plt.ylabel(f'{model.name} hierarchy \n ----------------------------> deeper layers ',fontsize=20)
+plt.xlabel('occurence of peak similarity  (s)',fontsize=29)
 figure_name=f'brain_x_{model.name}_timepeaks.png'
 print(figure_name)
 figfull = op.join(figure_dir,figure_name)

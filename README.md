@@ -21,22 +21,17 @@ Initially, it was planned to train from scratch a DCNN to "learn" more human/bra
 # Project definition
 # Background
 
-The idea of comparing and restraining a DCNN  weight representations is highly inspired by work from Cichy et al., (2016) and Kietzmann et al., (2019;PNAS). 
-
-[Cichy et al., (2016)](https://www.nature.com/articles/srep27755)
-[Kietzmann et al., (2019)](https://www.pnas.org/content/116/43/21854)
+The idea of comparing and restraining a DCNN  weight representations is highly inspired by work from [Cichy et al., (2016)](https://www.nature.com/articles/srep27755)
+[Kietzmann et al., (2019)](https://www.pnas.org/content/116/43/21854).
 
 
-We already know that DCNNs encodes information in a similar (hierarchical) way than our brain.
-
+Deep neural networks (DNNs) encodes information in a similar way to the visual brain to categorize images (e.g. primary visual cortex V1 encodes typically similar convolutional filters than the first layer of a DNN). 
+The idea here is to come up with a common measure of processing between DCNN and brain imaging signal, here electroencephalogrpahy (EEG), and link the computations in both modalities. 
 
 ![alt_text](brain_dcnn_parallel.png)
 
 
-Deep neural networks (DNNs) encodes information in a similar way to the visual brain to categorize images; "they" activate more or less specific neurons depending on what they are presented with, a$ 
-The idea here is to come up with a common measure of processing in DCNN that is comparable to brain imaging signal (here EEG). 
-A good sumary of brain and DCNN computations can be obtained with a Representational Dissimlarity Matrix (RDM).
-
+A good sumary of brain and DNN computations can be obtained with a Representational Dissimlarity Matrix (RDM).
 
 
 # Tools
@@ -55,10 +50,7 @@ we previously used brain EEG data to "decode" pairs of images (faces, objects, s
 By doing this with all pairs of images presented (49 stimuli = 1178 pairs), we created a Dissimilarity Matrix that is a summary of how the brain of each participant encodes diverse visual stimuli.
 This Representational Dissimilarity Matrix (RDM) was used as the base data input of this project.
 
--RDMs were averaged across particpants (N=23).
-   
-
-Description specifics : N = 23 neurotypical human participants; preprocessed EEG recordings (128 electrodes BioSemi); ~3200 trials per particpant (total trials ~= 73,000).
+-RDMs were averaged across particpants (N=23). Preprocessed EEG recordings at 128 electrodes (BioSemi)
 
 Task: simple one-back task over a stream of images containing faces of different emotions/gender, human-made/natural objects, animals and scenes. 
 
@@ -78,18 +70,33 @@ And perhaps :
 - A contained that enables to reproduce these analyses
 
 # Results
+## human brain RDMs
 
-group-average **Representational Dissimiarlity matrices (RDMs)** have been derived at every time step from image onset. 
+An interactive visualisation of the human brain data (RDMs) can be found in the following jupyter notebook : Analysis/interactive_figures_EEGxRSA.ipynb.
+
+
+Results for group-average **Representational Dissimiarlity matrices (RDMs)** have been derived at every time step from image onset. These are shown in 
 Each of this *stimulus* x *stimulus* matrix indicates the brain's representational model for various visual stimui.
 
-![alt text](rdms_avg_timecourse.png)
+2D coordinates of the representational distances from the RDMs are derived "onlin" using Multi-Dimensional Scaling (MDS) from sklearn MDS method.
+
+![alt text](interactive_RSA_time_MDS.gif)
 
 
-2D coordinates of the representational distances from the RDMs of 3 subjects groups were derived with Multi-Dimensional Scaling (MDS) using sklearn "MDS".
 
 
-![alt text](eeg-rsa-mds.gif)
+## DNN representations and link with brain data
 
+I computed an RDM for every layer of the VGG16 neural network (weights from imagenet)
+
+![alt text](dcnn_rdms_only.png)
+
+
+
+By correlating these DNN representations with the human RDMs, we obtain a time course of similarity between VGG16 hierarchical processing and the EEG brain visual representations.
+
+
+![alt text](brain_x_vgg16_timecourse.png)
 
 
 # Progress overview
@@ -97,6 +104,9 @@ Each of this *stimulus* x *stimulus* matrix indicates the brain's representation
 
 
 # Tools I learned during this project
- TBD
+
+  Using many Pyton libraries through implementing DNNs representations, flexible data visualisation, and link between brain and DNN computations. 
+
+
 # Conclusion and acknowledgements
  TBD

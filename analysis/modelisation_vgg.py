@@ -29,7 +29,7 @@ image_order = np.asarray(list(range(1,nimg+1)))-1
 
 # image description of the model used : here VGG16
 model=VGG16()
-plot_model(model, to_file='vgg.png')
+plot_model(model, to_file=f'{model.name}.png')
 
 # get model and weights (trained from imagenet)
 model = VGG16(weights='imagenet', include_top=True)
@@ -108,7 +108,7 @@ def show_activation_layer_rdm(activation_layers,layer_name):
     mask = np.triu(np.ones_like(corr, dtype=np.bool))
     sns.set()
     # plt.style.use("white_background")
-    sns.set(style="dark")
+    # sns.set(style="dark")
 
     # Set up the matplotlib figure
     f, ax = plt.subplots(figsize=(11, 9))
@@ -118,7 +118,7 @@ def show_activation_layer_rdm(activation_layers,layer_name):
 
     # Draw the heatmap with the mask and correct aspect ratio
     fig = sns.heatmap(rdm, cmap='rocket', center=0, #vmin=.1, vmax=1 , mask=mask,
-                square=True, linewidths=.25, cbar_kws={"shrink": .5})#annot=True)
+                square=True, linewidths=.25, cbar_kws={"shrink": .5})
 
     fig.set_yticklabels(fig.get_yticklabels(), rotation=45)
     plt.ylabel('visual stimuli')

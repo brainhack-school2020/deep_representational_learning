@@ -88,58 +88,6 @@ def define_labels_colors(cmap, image_order):
     return category_colors, labels_rdm
 
 
-
-
-def plot_mds(distances, image_data, categories, category_colors, scaler,mark_size):
-    
-    rdms_norm = normalise_dist(distances)
-    pos = get_mds(rdms_norm)
-
-    n_images = pos.shape[0]
-
-    # figure = plt.figure(figsize=(14,14)) 
-    # ax1 = plt.axes()  # standard axes 
-    # axis for the time-bar
-    # [left, bottom, width, height]
-    width = .8
-    height = .8
-    left = .1
-    bottom = .1
-
-    # ax1 = plt.axes([0.1, 0.9, 0.8, 0.1])  
-    ax2 = plt.axes([left, bottom, width, height])
-
-    # ax1.text(.5, .5, f'{title}', fontsize=22, horizontalalignment='center')
-
-    for i in range(n_images):
-        x1, y1 = pos[i,:]*1
-        
-        c = categories[category_colors[i]]
-
-        ax2.plot(x1, y1, marker='o', markeredgecolor=c, markerfacecolor=c, markersize=mark_size, zorder=1)
-        
-    for i in range(n_images):   
-        x1, y1 = pos[i,:]*1
-        
-        im = image_data[i]
-        ax2.imshow(im, cmap='gray', aspect='auto', extent=(x1-scaler, x1+scaler, y1-scaler, y1+scaler), zorder=1000)
-    
-    # ax2.axis('equal')
-    # ax2_x = np.asarray(ax2.get_xlim())
-    # ax2_y = np.asarray(ax2.get_ylim())
-    # border_x = .1*ax2_x
-    # border_y = .1*ax2_y
-
-    # ax2.set_xlim(ax2_x+border_x)
-    # ax2.set_ylim(ax2_y+border_y)
-
-
-    # ax1.axis('off')
-    # ax2.set_xlim([-.17, .17])# .32 for 250ms window MDS S
-    # ax2.set_ylim([-.17, .17])
-    return ax2
-
-
 def get_mds(utv, pos=None):
     
     rdm = scipy.spatial.distance.squareform(utv)
