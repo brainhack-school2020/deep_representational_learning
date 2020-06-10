@@ -34,7 +34,7 @@ The idea of comparing and restraining a DCNN  weight representations is highly i
 Deep neural networks (DNNs) encodes information in a similar way to the visual brain (e.g. primary visual cortex V1 encodes similar information than convolutional filters in the first layer of a DNN). 
 The idea here is to come up with a common measure of processing between DCNN and brain imaging signal, here electroencephalogrpahy (EEG), and link the computations in both modalities. 
 
-![alt_text](brain_dcnn_parallel.png)
+<img src="brain_dcnn_parallel.png" width="70%">
 
 
 A good sumary of brain and DNN computations can be obtained with a Representational Dissimlarity Matrix (RDM).
@@ -60,7 +60,7 @@ This Representational Dissimilarity Matrix (RDM) was used as the base data input
 
 Task: simple one-back task over a stream of images containing faces of different emotions/gender, human-made/natural objects, animals and scenes. 
 
-![alt text](methods_eeg_oneback.png)<img src="methods_eeg_oneback.png" width="40%">
+<img src="methods_eeg_oneback.png" width="70%">
 
 
 # Deliverables
