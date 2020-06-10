@@ -60,7 +60,7 @@ This Representational Dissimilarity Matrix (RDM) was used as the base data input
 
 Task: simple one-back task over a stream of images containing faces of different emotions/gender, human-made/natural objects, animals and scenes. 
 
-![alt text](methods_eeg_oneback.png)
+![alt text](methods_eeg_oneback.png)<img src="methods_eeg_oneback.png" width="40%">
 
 
 # Deliverables
