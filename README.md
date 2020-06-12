@@ -103,17 +103,18 @@ Using the same stimuli we shown to participants as input to DNNs, I computed an 
 
 By correlating these DNN representations with the human RDMs, I obtained the time courses of similarity between VGG16 hierarchical processing and the EEG brain representations.
 
-<img src="/analysis/models/models_rdm_visualisation/brain_x_vgg16_timecourse.png" height="120%">
+<img src="/analysis/models/models_rdm_visualisation/brain_x_vgg16_timecourse.png" height="100%">
 <!-- ![alt text](/analysis/models/models_rdm_visualisation/brain_x_vgg16_timecourse.png) -->
 
 
-## Tools I learned during this project
+## Skills I learned during this project
 
-- Python, and useful libraries (e.g. pandas, scipy, sklearn, tensorflow, keras)
-- Working with deep neural networks.
-- Interactive figures in Jupyter notebooks and visualization libraries (e.g. matplotlib, seaborn, ipywidgets)
-- Creating Binder reproducible environments to share code and figures. 
-- Markdown
+- **Python**, and useful libraries (e.g. pandas, scipy, sklearn, tensorflow, keras)
+- Machine learning (**deep learning**).
+- Interactive figures in **Jupyter notebooks** and visualization libraries (e.g. matplotlib, seaborn, ipywidgets)
+- **Binder** reproducible environments to share code and figures. 
+- **Markdown**
+- **GitHub**
 
 ## Conclusion and acknowledgements
 
