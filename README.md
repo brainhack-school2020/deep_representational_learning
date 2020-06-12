@@ -76,6 +76,7 @@ For the course :
 **Week 2 deliverable:** [README file](https://github.com/brainhack-school2020/deep_representational_learning/blob/master/README.md)
 
 **Week 3 deliverable:** : *Binder environment for data visualization*
+
 This link redirect to an interactive visualisation of the human brain data (RDMs):
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2020/deep_representational_learning/master?filepath=%2Fanalysis%2Finteractive_figures_EEGxRSA.ipynb)
 
