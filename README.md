@@ -37,7 +37,7 @@ The idea here is to come up with a common measure of processing between DCNN and
 <img src="brain_dcnn_parallel.png" width="70%">
 
 
-A good sumary of brain and DNN computations can be obtained with a Representational Dissimlarity Matrix (RDM).
+A good sumary of brain and DNN computations can be obtained with a Representational Dissimlarity Matrix (RDM, see DATA section).
 
 
 # Tools
@@ -67,13 +67,12 @@ Task: simple one-back task over a stream of images containing faces of different
 
 The plan is to have at least: 
 
-
 - Python scripts for steps 1 and 3
 - Markdown README.md explaining the whole pipeline.
 
 And perhaps :
 
-- A contained that enables to reproduce these analyses
+- A container that enables to reproduce these analyses
 
 # Results
 ## human brain RDMs
@@ -113,8 +112,11 @@ By correlating these DNN representations with the human RDMs, we obtain a time c
 
 # Tools I learned during this project
 
-  Using many Python libraries through implementing DNNs representations, flexible data visualisation, and link between brain and DNN computations. 
-
+- Python, and useful libraries (e.g. pandas, scipy, sklearn, tensorflow, keras)
+- Working with deep neural networks.
+- Interactive figures in Jupyter notebooks and visualization libraries (e.g. matplotlib, seaborn, ipywidgets)
+- Creating Binder reproducible environments to share code and figures. 
+- Markdown
 
 # Conclusion and acknowledgements
- TBD
+
