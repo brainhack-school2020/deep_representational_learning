@@ -95,15 +95,16 @@ Here, the 2D coordinates of the representational distances from the RDMs are com
 
 ## DNN representations and link with brain data
 
+### DNN representations
 Using the same stimuli we shown to participants as input to DNNs, I computed an RDM for every layer of the VGG16 neural network (weights from imagenet).
 
 ![alt text](dcnn_rdms_only.png)
 
 
-
+### Similarity between brain signal and DNN representations
 By correlating these DNN representations with the human RDMs, I obtained the time courses of similarity between VGG16 hierarchical processing and the EEG brain representations.
 
-<img src="/analysis/models/models_rdm_visualisation/brain_x_vgg16_timecourse.png" height="100%">
+<img src="/analysis/models/models_rdm_visualisation/brain_x_vgg16_timecourse.png" width="70%">
 <!-- ![alt text](/analysis/models/models_rdm_visualisation/brain_x_vgg16_timecourse.png) -->
 
 
