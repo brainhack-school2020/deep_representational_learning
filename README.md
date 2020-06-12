@@ -3,6 +3,8 @@ Week 3 deliverable :
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2020/deep_representational_learning/master?filepath=%2Fanalysis%2Finteractive_figures_EEGxRSA.ipynb)
 
+
+# Exploring deep neural networks' representations and their similarity with the visual brain
  
 # Summary
 
@@ -25,7 +27,7 @@ The first two steps will be developped in parallel. The last step will integrate
 Initially, the plan was to train from scratch a DCNN to "learn" more human/brain representations; but this was too ambitious and I chose to focus on learning programming tools (described below).
 
 # Project definition
-# Background
+## Background
 
 The idea of comparing and restraining a DCNN  weight representations is highly inspired by work from [Cichy et al., (2016)](https://www.nature.com/articles/srep27755)
 [Kietzmann et al., (2019)](https://www.pnas.org/content/116/43/21854).
@@ -40,15 +42,16 @@ The idea here is to come up with a common measure of processing between DCNN and
 A good sumary of brain and DNN computations can be obtained with a Representational Dissimlarity Matrix (RDM, see DATA section).
 
 
-# Tools
+## Tools
 
 The structure of the analyses will rely on :
 
 - developping analysis in Python scripts: pyrsa, scikit-learn, tensorFlow & keras
-- basics in visualisation tools : using jupyter notebooks, interactive widgets, seaborn, and scikit-learn for multi-dimensional scaling.  
+- basics in visualisation tools : jupyter notebooks, interactive widgets, seaborn, and scikit-learn for multi-dimensional scaling.  
 - Considering that the data is not completely available, no need to focus on BIDS standards that much.
+- Github
 
-# Data
+## Data
 
 Description (general): 
 
@@ -63,7 +66,7 @@ Task: simple one-back task over a stream of images containing faces of different
 <img src="methods_eeg_oneback.png" width="70%">
 
 
-# Deliverables
+## Deliverables
 
 The plan is to have at least: 
 
@@ -77,40 +80,34 @@ And perhaps :
 # Results
 ## human brain RDMs
 
-An interactive visualisation of the human brain data (RDMs) can be found in the following jupyter notebook :
+An interactive visualisation of the human brain data (RDMs) can be found through this link :
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2020/deep_representational_learning/master?filepath=%2Fanalysis%2Finteractive_figures_EEGxRSA.ipynb)
 
 
 
-Results for group-average **Representational Dissimiarlity matrices (RDMs)** have been derived at every time step from image onset. These are shown in 
+Results for group-average **Representational Dissimiarlity matrices (RDMs)** had previously been derived at every time step from image onset. These are shown in 
 Each of this *stimulus* x *stimulus* matrix indicates the brain's representational model for various visual stimui.
 
-2D coordinates of the representational distances from the RDMs are computed  "online" using Multi-Dimensional Scaling (MDS) from sklearn MDS method.
+Here, the 2D coordinates of the representational distances from the RDMs are computed "online" using Multi-Dimensional Scaling from sklearn MDS method (to play interactively with this, see binder link above).
 
 ![alt text](interactive_RSA_time_MDS.gif)
 
 
-
-
 ## DNN representations and link with brain data
 
-I computed an RDM for every layer of the VGG16 neural network (weights from imagenet)
+Using the same stimuli we shown to participants as input to DNNs, I computed an RDM for every layer of the VGG16 neural network (weights from imagenet).
 
 ![alt text](dcnn_rdms_only.png)
 
 
 
-By correlating these DNN representations with the human RDMs, we obtain a time course of similarity between VGG16 hierarchical processing and the EEG brain visual representations.
+By correlating these DNN representations with the human RDMs, I obtained the time courses of similarity between VGG16 hierarchical processing and the EEG brain representations.
+
+<img src="/analysis/models/models_rdm_visualisation/brain_x_vgg16_timecourse.png" height="120%">
+<!-- ![alt text](/analysis/models/models_rdm_visualisation/brain_x_vgg16_timecourse.png) -->
 
 
-![alt text](/analysis/models/models_rdm_visualisation/brain_x_vgg16_timecourse.png)
-
-
-# Progress overview
- This project was first initiated the 19th of May 2020 by Simon Faghel-Soubeyrand as a part of the Brain Hack SChool.
-
-
-# Tools I learned during this project
+## Tools I learned during this project
 
 - Python, and useful libraries (e.g. pandas, scipy, sklearn, tensorflow, keras)
 - Working with deep neural networks.
@@ -118,5 +115,5 @@ By correlating these DNN representations with the human RDMs, we obtain a time c
 - Creating Binder reproducible environments to share code and figures. 
 - Markdown
 
-# Conclusion and acknowledgements
+## Conclusion and acknowledgements
 
