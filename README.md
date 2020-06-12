@@ -104,7 +104,7 @@ Using the same stimuli we shown to participants as input to DNNs, I computed an 
 ### Similarity between brain signal and DNN representations
 By correlating these DNN representations with the human RDMs, I obtained the time courses of similarity between VGG16 hierarchical processing and the EEG brain representations.
 
-<img src="/analysis/models/models_rdm_visualisation/brain_x_vgg16_timecourse.png" width="70%">
+<img src="timecourse_EEGxDNN_complete.png" width="100%">
 <!-- ![alt text](/analysis/models/models_rdm_visualisation/brain_x_vgg16_timecourse.png) -->
 
 
