@@ -1,4 +1,4 @@
-# Exploring deep neural networks' representations and their similarity with the visual brain
+# Exploring representations of deep neural networks and their similarity with the human brain 
  
 ## Summary
 
@@ -118,4 +118,8 @@ By correlating these DNN representations with the human RDMs, I obtained the tim
 - **Inkscape** for figures.
 
 ## Conclusion and acknowledgements
+
+Big thanks to all instructors, to Peer & Valerie, and to all the BHS community. This was a full month but I learned and enjoyed it a lot. Also thanks to Michelle, which reminded me all the deliverables and deadlines throughout the way!
+
+Also thanks to my supervisors (F. Gosselin, I.Charest) and collaborators of this project, which will be integrated as part of my phD.
 
