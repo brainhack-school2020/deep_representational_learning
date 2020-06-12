@@ -18,7 +18,7 @@ The project will unfold in three steps.
 
 The first two steps will be developped in parallel. The last step will integrate their output.
 
-Initially, the plan was to train from scratch a DCNN to "learn" more human/brain representations; but this was too ambitious and I chose to focus on learning programming tools (described below).
+Initially, the plan was to train from scratch a DCNN to "learn" more human/brain representations. This is a mid/long-term role, and here I chose to focus on learning programming tools (described below).
 
 ## Project definition
 ### Background
@@ -71,11 +71,13 @@ And perhaps :
 
 - A container that enables to reproduce these analyses
 
+For the course : 
 
- #### week 3 deliverable 
-An interactive visualisation of the human brain data (RDMs) can be found here :
+**Week 2 deliverable:** [README file](https://github.com/brainhack-school2020/deep_representational_learning/blob/master/README.md)
+**Week 3 deliverable:** : *Binder environment for data visualization*
+This link redirect to an interactive visualisation of the human brain data (RDMs):
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2020/deep_representational_learning/master?filepath=%2Fanalysis%2Finteractive_figures_EEGxRSA.ipynb)
-
+**Week 4 deliverable:** [presentation](https://github.com/brainhack-school2020/deep_representational_learning/blob/master/presentation/BHS_2020.pdf)
 
 
 ## Results
