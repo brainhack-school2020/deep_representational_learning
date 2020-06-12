@@ -81,6 +81,11 @@ This link redirect to an interactive visualisation of the human brain data (RDMs
 
 
 ## Results
+
+## Pipeline (analysis and visualization) with scripts.
+<img src="pipeline_survol.png" width="60%">
+
+
 ## human brain RDMs
 
 An interactive visualisation of the human brain data (RDMs) can be found here :
@@ -98,7 +103,7 @@ Here, the 2D coordinates of the representational distances from the RDMs are com
 ## DNN representations and link with brain data
 
 ### DNN representations
-Using the same stimuli we shown to participants as input to DNNs, I computed an RDM for every layer of the VGG16 neural network (weights from imagenet).
+Using the same stimuli we showed to participants as input to DNNs, I computed an RDM for every layer of the VGG16 neural network (weights from imagenet).
 
 <img src="dcnn_rdms_only.png" width="70%">
 
