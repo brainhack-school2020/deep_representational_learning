@@ -1,12 +1,6 @@
-
-Week 3 deliverable : 
-
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2020/deep_representational_learning/master?filepath=%2Fanalysis%2Finteractive_figures_EEGxRSA.ipynb)
-
-
 # Exploring deep neural networks' representations and their similarity with the visual brain
  
-# Summary
+## Summary
 
 I'm a PhD student at Université de Montréal & University of Birmingham (UK). I use an aggregate of psychophysics, EEG, and computational techniques to understand individual differences in vision, specifically in object/face recognition.
 
@@ -26,8 +20,8 @@ The first two steps will be developped in parallel. The last step will integrate
 
 Initially, the plan was to train from scratch a DCNN to "learn" more human/brain representations; but this was too ambitious and I chose to focus on learning programming tools (described below).
 
-# Project definition
-## Background
+## Project definition
+### Background
 
 The idea of comparing and restraining a DCNN  weight representations is highly inspired by work from [Cichy et al., (2016)](https://www.nature.com/articles/srep27755)
 [Kietzmann et al., (2019)](https://www.pnas.org/content/116/43/21854).
@@ -76,11 +70,16 @@ The plan is to have at least:
 And perhaps :
 
 - A container that enables to reproduce these analyses
+ #### week 3 deliverable 
+An interactive visualisation of the human brain data (RDMs) can be found here :
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2020/deep_representational_learning/master?filepath=%2Fanalysis%2Finteractive_figures_EEGxRSA.ipynb)
 
-# Results
+
+
+## Results
 ## human brain RDMs
 
-An interactive visualisation of the human brain data (RDMs) can be found through this link :
+An interactive visualisation of the human brain data (RDMs) can be found here :
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2020/deep_representational_learning/master?filepath=%2Fanalysis%2Finteractive_figures_EEGxRSA.ipynb)
 
 
@@ -108,14 +107,15 @@ By correlating these DNN representations with the human RDMs, I obtained the tim
 <!-- ![alt text](/analysis/models/models_rdm_visualisation/brain_x_vgg16_timecourse.png) -->
 
 
-## Skills I learned during this project
+## Skills I used during this project
 
 - **Python**, and useful libraries (e.g. pandas, scipy, sklearn, tensorflow, keras)
 - Machine learning (**deep learning**).
 - Interactive figures in **Jupyter notebooks** and visualization libraries (e.g. matplotlib, seaborn, ipywidgets)
 - **Binder** reproducible environments to share code and figures. 
-- **Markdown**
 - **GitHub**
+- **Markdown**
+- **Inkscape** for figures.
 
 ## Conclusion and acknowledgements
 
