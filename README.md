@@ -70,6 +70,8 @@ The plan is to have at least:
 And perhaps :
 
 - A container that enables to reproduce these analyses
+
+
  #### week 3 deliverable 
 An interactive visualisation of the human brain data (RDMs) can be found here :
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brainhack-school2020/deep_representational_learning/master?filepath=%2Fanalysis%2Finteractive_figures_EEGxRSA.ipynb)
@@ -84,8 +86,7 @@ An interactive visualisation of the human brain data (RDMs) can be found here :
 
 
 
-Results for group-average **Representational Dissimiarlity matrices (RDMs)** had previously been derived at every time step from image onset. These are shown in 
-Each of this *stimulus* x *stimulus* matrix indicates the brain's representational model for various visual stimui.
+Results for group-average **Representational Dissimiarlity matrices (RDMs)** had previously been derived at every time step from image onset. These  *stimulus* x *stimulus* matrices contains pairwise decoding accuracies between all images (e.g. image face vs image car), indicating the brain's representational model across various visual stimuli.
 
 Here, the 2D coordinates of the representational distances from the RDMs are computed "online" using Multi-Dimensional Scaling from sklearn MDS method (to play interactively with this, see binder link above).
 
@@ -97,8 +98,7 @@ Here, the 2D coordinates of the representational distances from the RDMs are com
 ### DNN representations
 Using the same stimuli we shown to participants as input to DNNs, I computed an RDM for every layer of the VGG16 neural network (weights from imagenet).
 
-![alt text](dcnn_rdms_only.png)
-
+<img src="dcnn_rdms_only.png" width="70%">
 
 ### Similarity between brain signal and DNN representations
 By correlating these DNN representations with the human RDMs, I obtained the time courses of similarity between VGG16 hierarchical processing and the EEG brain representations.
@@ -109,7 +109,7 @@ By correlating these DNN representations with the human RDMs, I obtained the tim
 
 ## Skills I used during this project
 
-- **Python**, and useful libraries (e.g. pandas, scipy, sklearn, tensorflow, keras)
+- **Python**, and useful libraries (e.g. pingouin, pandas, scipy, sklearn, tensorflow, keras)
 - Machine learning (**deep learning**).
 - Interactive figures in **Jupyter notebooks** and visualization libraries (e.g. matplotlib, seaborn, ipywidgets)
 - **Binder** reproducible environments to share code and figures. 
